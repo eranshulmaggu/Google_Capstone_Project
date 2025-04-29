@@ -57,8 +57,8 @@ SELECT
 FROM
   cyclistic_trip_data
 ```
-<img src="Screenshots/Screenshot 2025-04-29 232435.png" width="250">
-<img src="Screenshots/Screenshot 2025-04-29 232443.png" width="250">
+<img src="Screenshots/Screenshot 2025-04-29 232435.png" width="300">
+<img src="Screenshots/Screenshot 2025-04-29 232443.png" width="300">
 
 3. Since GPS (latitude and longitude) data can have similar fractional data of same location, this has been verified and transformed into average values and exported into csv file (avg_start_station, avg_end_station) and imported as avg_start_station and avg_end_station tables in the database for easier management of location data.
 ```
@@ -74,10 +74,10 @@ FROM
 WHERE
     start_station_name is not NULL
 GROUP BY
-    start_station_name
+    start_station_name, start_lat;
 ```
-<img src="Screenshots/Screenshot 2025-04-29 235851.png" width="250">
-<img src="Screenshots/Screenshot 2025-04-29 235905.png" width="250">
+<img src="Screenshots/Screenshot 2025-04-29 235851.png" width="600">
+<img src="Screenshots/Screenshot 2025-04-29 235905.png" width="400">
 
 Above mentioned procedure has been executed for the end_station_name column as well.
 
@@ -100,8 +100,14 @@ GROUP BY
 Result obtained from this query was saved as a csv file (avg_start_station_gps.csv and avg_end_station_gps.csv) for later usage as table and join with the rest of the trip data.
 
 4. There has been some discrepancies regarding ride duration. Some of the ride durations came out negative (83 rows) and these were left out in the final cleaning query.
-<img src="Screenshots/Screenshot 2025-04-30 000137.png" width="250">
-<img src="Screenshots/Screenshot 2025-04-30 000150.png" width="250">
+<img src="Screenshots/Screenshot 2025-04-30 000137.png" width="600">
+<img src="Screenshots/Screenshot 2025-04-30 000150.png" width="400">
+   Moreover, since there are full-day passes for casual riders, there has been 4198 entries of rides more than 24 hour duration and these were kept in the final      processed data set.
+   
+<img src="Screenshots/Screenshot 2025-04-30 000825.png" width="600">
+<img src="Screenshots/Screenshot 2025-04-30 000838.png" width="400">
+
+5. The previously collected trip data has been inner joined with avg_start_station and avg_end_station location data and exported to csv file for analysis using following SQL query:
 
   
 
