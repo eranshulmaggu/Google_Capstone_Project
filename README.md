@@ -45,5 +45,21 @@ Secondary: Cyclistic executive team (approves recommended marketing program)
 
 * R: To analyze and visualize data
 
+## Cleaning and Transformation of Data
+1. All of the last 12 month's ride data has been separated month-wise in the server. For proper management all of the data chunks are combined in a single table named "cyclistic_trip_data"
+
+2. COUNT() function was run to check the row count of the aggregated data-set. There are 5757551 rows in this data-set.
+
+  
+```{sql, connection = con}
+
+SELECT
+  COUNT(*)
+FROM
+  cyclistic_trip_data
+
+
+    
+
   
 
