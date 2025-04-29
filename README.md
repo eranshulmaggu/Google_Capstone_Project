@@ -51,15 +51,57 @@ Secondary: Cyclistic executive team (approves recommended marketing program)
 2. COUNT() function was run to check the row count of the aggregated data-set. There are 5757551 rows in this data-set.
 
   
-```{sql, connection = con}
-
+```
 SELECT
   COUNT(*)
 FROM
   cyclistic_trip_data
+```
+<img src="Screenshots/Screenshot 2025-04-29 232435.png" width="250">
+<img src="Screenshots/Screenshot 2025-04-29 232443.png" width="250">
 
+3. Since GPS (latitude and longitude) data can have similar fractional data of same location, this has been verified and transformed into average values and exported into csv file (avg_start_station, avg_end_station) and imported as avg_start_station and avg_end_station tables in the database for easier management of location data.
+```
 
-    
+-- Checking for multiple GPS values of same location for start_station_name
+
+SELECT
+    start_station_name, 
+    start_lat, 
+    count(*)
+FROM 
+    cyclistic_trip_data
+WHERE
+    start_station_name is not NULL
+GROUP BY
+    start_station_name
+```
+<img src="Screenshots/Screenshot 2025-04-29 235851.png" width="250">
+<img src="Screenshots/Screenshot 2025-04-29 235905.png" width="250">
+
+Above mentioned procedure has been executed for the end_station_name column as well.
+
+```
+
+-- Calculating average GPS values for start_station_name
+
+SELECT
+    start_station_name,
+    start_staion_id,
+    average(start_lat) AS start_lat_avg,
+    average(start_lng) AS start_lng_avg,
+FROM 
+    cyclistic_trip_data
+WHERE
+    start_station_name is not NULL
+GROUP BY
+    start_station_name
+```
+Result obtained from this query was saved as a csv file (avg_start_station_gps.csv and avg_end_station_gps.csv) for later usage as table and join with the rest of the trip data.
+
+4. There has been some discrepancies regarding ride duration. Some of the ride durations came out negative (83 rows) and these were left out in the final cleaning query.
+<img src="Screenshots/Screenshot 2025-04-30 000137.png" width="250">
+<img src="Screenshots/Screenshot 2025-04-30 000150.png" width="250">
 
   
 
