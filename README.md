@@ -16,10 +16,34 @@ Moreno (Director of Marketing) has set a clear goal: Design marketing strategies
 ## Business Task
 To identify how do annual members and casual rider s use Cyclistic differently.
 
-Stakeholders
+## Stakeholders
 Primary: Lily Monero, Director of Marketing
 
 Secondary: Cyclistic executive team (approves recommended marketing program)
 
-Step 2: Collection and Preparation of Data
+## Step 2: Collection and Preparation of Data
+
+## Data & Source Integrity
+* Data is stored in remote server [url](https://divvy-tripdata.s3.amazonaws.com/index.html) and provided by Motivate International Inc. and separated in chunks of querterly .csv files.
+* Data has been protected under data-privacy license mentioned here: [license](https://divvybikes.com/data-license-agreement). This license states that this data has been provided "As is" as per bikeshares sole discretion. So reliability of the data can be vetted eventhough this has been provided by third party.
+* This data cannot be connected to the individual riders and their credit card numbers as unique rider ID has been used to record ride data.
+
+## Observations
+1.  There are 13 columns in the data files. These are: ride_id, rideable_type, started_at, ended_at, start_station_name, end_station_name, start_station_id, end_station_id, start_station, start_lat, start_lng, end_lat, end_lng, member_casual
+
+2.  started_at and ended_at columns contains date-time data and formatted as YYYY-MM-DD HH:MM:SS format.
+
+3.  start_station_id and end_station_id has discrepancy. Some of the IDs contain alphabets at the beginning (12 char length) and some contains only numbers (variable length 3-8).
+
+4. Although some of the csv files did not have start_station_name, start_station_id, end_station_name, end_station_id; these rows contain latitude and longitude data. This can be used to fill these empty values.
+
+5. member_casual column contains 2 types of membership data: member or casual.
+
+# Step 3: Processing Data (Cleaning and Transformation)
+## Tools Used
+* SQL (sqlite, DB Browser): To process and clean data for further analysis
+
+* R: To analyze and visualize data
+
+  
 
