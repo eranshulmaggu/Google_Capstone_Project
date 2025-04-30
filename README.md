@@ -218,7 +218,7 @@ df_day_passes
 ### Speculation
 Casual riders use more day passes than the annual members.
 
-## Average Ride Duration by Membership Types
+### Average Ride Duration by Membership Types
 
 ```
 df_avg_time <- df %>% drop_na() %>%
@@ -229,7 +229,7 @@ df_avg_time
 ```
 <img src="Screenshots/Screenshot 2025-04-30 094237.png" width="600">
 
-## Visualizing Average Ride Duration
+### Visualizing Average Ride Duration
 
 ```
 install.packages ("ggplot")
@@ -248,7 +248,7 @@ ggplot(data = df_avg_time) + geom_col(mapping = aes(x = user_type, y = average_r
 ### Speculation
 Casual riders spend twice as more time riding than the annual members.
 
-## Weekday-wise Ride Counts of Different Members
+### Weekday-wise Ride Counts of Different Members
 
 ```
 df_weekly_count <- df %>% 
@@ -271,7 +271,7 @@ weekly_ride_plot
 ### Speculation
 Through out the week causal riders use Cyclistic's service almost half the amount of annual members. However, during weekly holidays (Saturday and Sunday) this number surpass the weekly ride counts of annual members whereas, opposite trend is observed for annual members.
 
-## Month-wise Ride Count by Membership Types
+### Month-wise Ride Count by Membership Types
 
 ```
 df_monthly_count <- df %>% 
@@ -290,7 +290,7 @@ monthly_ride_plot
 ### Speculation
 Number of rides made by both the casual riders and the annual members vary as per month. Such as, during winter casual riders are less likely to use bikes rather than the annual members. On the other hand, although both casual and annual members ride counts are higher during summer, casual riders are more likely to use bikes (June, July, August) compared to annual members.
 
-## Hour-wise Ride Counts by Membership Types
+### Hour-wise Ride Counts by Membership Types
 
 ```
 df_hourly_count <- df %>% 
@@ -311,7 +311,7 @@ hourly_ride_plot
 ### Speculation
 It is clear that the spike at the hours 08 and 17 indicates that most of the annual members using Cyclistic service are the working people and using as their office rides whereas, a gradual increase of causal riders 16-18th hour of the day indicates general usage in the evening.
 
-## Routes Taken by Different Membership Types
+### Routes Taken by Different Membership Types
 
 ```
 # Popular start stations for member types
@@ -344,7 +344,7 @@ routes_plot_end
 ### Speculation
 From the above plots it can be seen that Streeter Dr & Grand Ave has the largest casual rider gathering. This spot can be used to advertise for the annual membership.
 
-## Preferred Choice of Bikes
+### Preferred Choice of Bikes
 
 ```
 df_bike_choice <- df %>% 
@@ -364,7 +364,7 @@ ggplot(data = df_bike_choice) + geom_col(mapping = aes(x = bike_type, y = count_
 ### Speculation
 Casual riders use all three types of bikes whereas annual members prefer classic bikes mostly.
 
-## Distance Traveled by Different Riders
+### Distance Traveled by Different Riders
 
 ```
 # Merging start and end station names to identify unique routes and no. of it's appearance in data set
