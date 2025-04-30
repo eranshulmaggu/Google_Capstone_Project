@@ -109,5 +109,71 @@ Result obtained from this query was saved as a csv file (avg_start_station_gps.c
 
 5. The previously collected trip data has been inner joined with avg_start_station and avg_end_station location data and exported to csv file for analysis using following SQL query:
 
-  
+```
+-- Preparing and cleaning data for analysis and visualization
+
+SELECT
+	c.rideable_type,
+	c.started_at, 
+	c.ended_at, 
+	round((JULIANDAY(c.ended_at)-JULIANDAY(c.started_at))*1440) as ride_duration_min,
+	c.start_station_name,
+	avg_s.start_lat_avg,
+	avg_s.start_lng_avg,
+	c.end_station_name,
+	avg_e.end_lat_avg,
+	avg_e.end_lng_avg,
+	member_casual
+FROM
+	cyclistic_trips_data as c
+INNER JOIN
+	avg_start_station_gps as avg_s
+	ON c.start_station_name = avg_s.start_station_name
+INNER JOIN
+	avg_end_station_gps as avg_e
+	ON c.end_station_name = avg_e.end_station_name
+WHERE
+	ride_duration_min > 0
+ORDER BY
+	c.start_station_name ASC
+```
+
+Final cleaning of rows with blank cells have been done with R:
+
+```
+install.packages("tidyverse")
+library(tidyverse)
+
+df <- read_csv('cleaned_trip_data_exported.csv')
+cat('Total rows before dropping blanks: ', nrow(df))
+
+df <- df %>%
+  drop_na()
+cat('Total rows after dropping blanks: ', nrow(df))
+
+# Writing data to file for future use.
+write.csv(df, 'cleaned_trip_data_working_copy.csv')
+```
+# Step 4: Analysis
+## Install Necessary Packages
+```
+install.packages("lubridate")
+install.packages("janitor")
+install.packages("skimr")
+install.packages("geosphere")
+```
+
+## Importing Necessary Libraries
+
+```
+library(lubridate)
+library(janitor)
+library(skimr)
+library(geosphere)
+```
+## Taking a Glimpse at the Data-frame
+```
+df <- df %>% 
+  glimpse()
+```
 
