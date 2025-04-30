@@ -13,22 +13,22 @@ Customers who purchase single-ride or full-day passes are referred to as casual 
 Moreno (Director of Marketing) has set a clear goal: Design marketing strategies aimed at converting casual riders into annual members. In order to do that, however, the marketing analyst team needs to better understand how annual members and casual riders differ, why casual riders would buy a membership, and how digital media could affect their marketing tactics. Moreno and her team are interested in analyzing the Cyclistic historical bike trip data to identify trends.
 
 ## Step 1: Getting Information of The Task
-## Business Task
+### Business Task
 To identify how do annual members and casual rider's use Cyclistic differently.
 
-## Stakeholders
+### Stakeholders
 Primary: Lily Monero, Director of Marketing
 
 Secondary: Cyclistic executive team (approves recommended marketing program)
 
 ## Step 2: Collection and Preparation of Data
 
-## Data & Source Integrity
+### Data & Source Integrity
 * Data is stored in remote server [url](https://divvy-tripdata.s3.amazonaws.com/index.html) and provided by Motivate International Inc. and separated in chunks of querterly .csv files.
 * Data has been protected under data-privacy license mentioned here: [license](https://divvybikes.com/data-license-agreement). This license states that this data has been provided "As is" as per bikeshares sole discretion. So reliability of the data can be vetted eventhough this has been provided by third party.
 * This data cannot be connected to the individual riders and their credit card numbers as unique rider ID has been used to record ride data.
 
-## Observations
+### Observations
 1.  There are 13 columns in the data files. These are: ride_id, rideable_type, started_at, ended_at, start_station_name, end_station_name, start_station_id, end_station_id, start_station, start_lat, start_lng, end_lat, end_lng, member_casual
 
 2.  started_at and ended_at columns contains date-time data and formatted as YYYY-MM-DD HH:MM:SS format.
@@ -40,12 +40,12 @@ Secondary: Cyclistic executive team (approves recommended marketing program)
 5. member_casual column contains 2 types of membership data: member or casual.
 
 ## Step 3: Processing Data (Cleaning and Transformation)
-## Tools Used
+### Tools Used
 * SQL (sqlite, DB Browser): To process and clean data for further analysis
 
 * R: To analyze and visualize data
 
-## Cleaning and Transformation of Data
+### Cleaning and Transformation of Data
 1. All of the last 12 month's ride data has been separated month-wise in the server. For proper management all of the data chunks are combined in a single table named "cyclistic_trip_data"
 
 2. COUNT() function was run to check the row count of the aggregated data-set. There are 5757551 rows in this data-set.
