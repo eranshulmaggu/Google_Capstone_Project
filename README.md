@@ -176,4 +176,256 @@ library(geosphere)
 df <- df %>% 
   glimpse()
 ```
+<img src="Screenshots/Screenshot 2025-04-30 093016.png" width="600">
+## Renaming Columns for Easier Understanding
 
+```
+df <- rename(df, 
+             user_type = member_casual, 
+             bike_type = rideable_type)
+
+glimpse(df)
+```
+<img src="Screenshots/Screenshot 2025-04-30 093321.png" width="600">
+
+## Basic Descriptive Analysis
+
+```
+df_min_max_time <- df %>% 
+  select(user_type, ride_duration_min) %>% 
+  group_by(user_type) %>%
+  summarize("max_ride_ride_duration (min)" = max(ride_duration_min), "min_ride_duration (min)" = min(ride_duration_min))
+
+df_min_max_time
+```
+<img src="Screenshots/Screenshot 2025-04-30 093605.png" width="600">
+
+Since Cyclistic provides day passes, there are rides with more than 24 hour ride passes which are contributing in the higher value of max_ride_duration.
+
+```
+df_day_passes <- df %>% 
+  select(user_type, ride_duration_min) %>% 
+  group_by(user_type) %>% 
+  filter(ride_duration_min >= 1440) %>% 
+  summarize(day_passes = n())
+
+df_day_passes
+```
+<img src="Screenshots/Screenshot 2025-04-30 094008.png" width="600">
+
+### Speculation
+Casual riders use more day passes than the annual members.
+
+## Average Ride Duration by Membership Types
+
+```
+df_avg_time <- df %>% drop_na() %>%
+  group_by(user_type) %>%
+  summarize(average_ride_duration_mins = mean(ride_duration_min))
+
+df_avg_time
+```
+<img src="Screenshots/Screenshot 2025-04-30 094237.png" width="600">
+
+## Visualizing Average Ride Duration
+
+```
+install.packages ("ggplot")
+library(ggplot)
+ggplot(data = df_avg_time) + geom_col(mapping = aes(x = user_type, y = average_ride_duration_mins, fill = user_type)) + 
+  labs(title = "Average Ride Duration", 
+       subtitle = "Average ride durations by different membrship types", 
+       x = "Membership types", 
+       y = "Average ride duration (min)") + 
+  theme_light()
+
+```
+
+<img src= "Screenshots/Screenshot 2025-04-30 094444.png" width="600">
+
+### Speculation
+Casual riders spend twice as more time riding than the annual members.
+
+## Weekday-wise Ride Counts of Different Members
+
+```
+df_weekly_count <- df %>% 
+  group_by(day_of_week = wday(started_at, label = TRUE), user_type) %>% 
+  summarize(no_of_rides = n())
+
+weekly_ride_plot <- ggplot(df_weekly_count) +
+  geom_line(mapping = aes(x = day_of_week, y = no_of_rides,
+                          group = user_type, color = user_type)) +
+  labs(title = "Weekly Ride Count",
+       subtitle = "Weekly rides made by different membership types",
+       x = "Day of week", y = "No. of rides") +
+  theme_light()
+
+weekly_ride_plot
+```
+
+<img src="Screenshots/Screenshot 2025-04-30 094636.png" width="600">
+
+### Speculation
+Through out the week causal riders use Cyclistic's service almost half the amount of annual members. However, during weekly holidays (Saturday and Sunday) this number surpass the weekly ride counts of annual members whereas, opposite trend is observed for annual members.
+
+## Month-wise Ride Count by Membership Types
+
+```
+df_monthly_count <- df %>% 
+  group_by(month = month(started_at, label = TRUE), user_type) %>% 
+  summarize(no_of_rides = n())
+
+monthly_ride_plot <- ggplot(df_monthly_count) +
+  geom_col(mapping = aes(x = month, y = no_of_rides, fill = user_type),
+           position = "dodge") + labs(title = "Monthly Ride Count", subtitle = "Monthly rides made by different membership types", x = "No. of rides", y = "Months") + 
+  theme_light()
+
+monthly_ride_plot
+```
+<img src="Screenshots/Screenshot 2025-04-30 094814.png" width="600">
+
+### Speculation
+Number of rides made by both the casual riders and the annual members vary as per month. Such as, during winter casual riders are less likely to use bikes rather than the annual members. On the other hand, although both casual and annual members ride counts are higher during summer, casual riders are more likely to use bikes (June, July, August) compared to annual members.
+
+## Hour-wise Ride Counts by Membership Types
+
+```
+df_hourly_count <- df %>% 
+  group_by(hour_of_day = hour(started_at), user_type) %>% 
+  summarize(no_of_rides_by_hour = n())
+
+hourly_ride_plot <- ggplot(df_hourly_count) + 
+  geom_line(mapping = aes(x = hour_of_day, y = no_of_rides_by_hour, 
+                          group = user_type, color = user_type)) +
+  labs(title = "Hourly Ride Count", subtitle = "Hourly rides made by different membership types", y = "No. of rides by hour", x = "Hour of day") +
+  theme_light() + scale_x_continuous(breaks = c(0:23))
+
+hourly_ride_plot
+```
+
+<img src="Screenshots/Screenshot 2025-04-30 094955.png" width="600">
+
+### Speculation
+It is clear that the spike at the hours 08 and 17 indicates that most of the annual members using Cyclistic service are the working people and using as their office rides whereas, a gradual increase of causal riders 16-18th hour of the day indicates general usage in the evening.
+
+## Routes Taken by Different Membership Types
+
+```
+# Popular start stations for member types
+df_routes_taken <- df %>% 
+  count(user_type, start_station_name, sort = TRUE) %>% 
+  head(10)
+
+routes_plot_start <- ggplot(df_routes_taken) + geom_bar(mapping = aes(y = start_station_name, x = n, fill = user_type), stat = "identity") + 
+  theme_light() + labs(x = "No. of trips started", y = "start station name")
+
+routes_plot_start
+```
+
+<img src="Screenshots/Screenshot 2025-04-30 095318.png" width="600">
+
+```
+# Popular end stations for member types
+df_routes_ended <- df %>% 
+  count(user_type, end_station_name, sort = TRUE) %>% 
+  head(10)
+
+routes_plot_end <- ggplot(df_routes_ended) + geom_bar(mapping = aes(y = end_station_name, x = n, fill = user_type), stat = "identity") + 
+  theme_light() + labs(x = "No. of trips ended", y = "end station name")
+
+routes_plot_end
+```
+
+<img src="Screenshots/Screenshot 2025-04-30 095443.png" width="600">
+
+### Speculation
+From the above plots it can be seen that Streeter Dr & Grand Ave has the largest casual rider gathering. This spot can be used to advertise for the annual membership.
+
+## Preferred Choice of Bikes
+
+```
+df_bike_choice <- df %>% 
+  select(user_type, bike_type) %>% 
+  group_by(bike_type, user_type) %>% 
+  summarize(count_of_bike = n())
+
+ggplot(data = df_bike_choice) + geom_col(mapping = aes(x = bike_type, y = count_of_bike,
+                                                       fill = user_type), position = "dodge") + 
+  theme_light() + labs(title = "Choice of Bikes", 
+                       subtitle = "Choice of bike types between rider types",
+                       x = "Type of bikes", y = "No. of rider types using bike")
+```
+
+<img src="Screenshots/Screenshot 2025-04-30 095613.png" width ="600">
+
+### Speculation
+Casual riders use all three types of bikes whereas annual members prefer classic bikes mostly.
+
+## Distance Traveled by Different Riders
+
+```
+# Merging start and end station names to identify unique routes and no. of it's appearance in data set
+
+df_distance <- df %>% 
+  select(start_station_name, end_station_name, start_lat_avg, start_lng_avg, end_lat_avg, end_lng_avg, user_type) %>% 
+  mutate(route_merged = paste(start_station_name, " to ", end_station_name)) %>% 
+  group_by(route_merged) %>% 
+  mutate(route_count = n())
+
+# calculating distance from unique routes
+
+df_distance_user <- df_distance[row.names(unique(df_distance[,c("route_merged")])),] %>% 
+  group_by(user_type) %>%
+  rowwise() %>% 
+  summarize(user_type, distance_km = (distm(c(start_lat_avg, start_lng_avg), c(end_lat_avg, end_lng_avg), fun = distHaversine)*route_count)/1000)
+
+# Producing summary of distance traveled by user types
+
+df_distance_summary <- df_distance_user %>% 
+  summarise(total_distance_travelled = sum(distance_km), average_dist = mean(distance_km))
+
+df_distance_summary
+```
+
+```
+avg_distance_plot = ggplot(data=df_distance_summary) + geom_col(mapping = aes(x=user_type, y=average_dist, fill=user_type)) + 
+  labs(title = "Average Distance by Users",
+       subtitle = "Average distance traveled by different user types throughout the year",
+       x = "Membreship type", y = "Avg. distance traveled (km)") +
+  theme_light()
+
+avg_distance_plot
+```
+<img src="Screenshots/Screenshot 2025-04-30 095613.png" width="600">
+
+### Speculation
+Casual riders travel less distance compared to the annual members on average.
+
+## Step 5: Summarizing Findings
+The key business question here was to identify the differences between usage pattern between the 2 types of rider (casual and annual members) of Cyclistic. There has been several differences observed from the above mentioned analysis of 12 month usage data. From the above mentioned analysis 3 major patterns have been identified. These are:
+
+	1. Casual riders spend more time than the annual members riding bikes. This can be indicative of annual members using bikes for specific and routinized purpose.
+
+	2. Most of the casual riders use bike during afternoon whereas, annual members use bikes as work transport which can be clearly seen by the peak during office starting and ending hours.
+
+	3. Usage of bikes in both user types is seasonal. Both casual riders and annual members ride less in during Winter. On the other hand, although ride counts by both types of riders are high during Summer, casual riders are more likely to use bikes.
+
+## Conclusion
+In conclusion, there are several features / patterns can be observed from this data set. As per these observations following recommendations can be considered:
+
+1. During summer the number of bike rides by casual riders are more than the annual members. Moreover, average bike riding time is greater in case of 		   
+   casual riders. This can be a good opportunity to offer discounts to become annual members with cheap rides. The longer the subscription the lower will 	   
+   be the down payment.
+
+2. In order to attract working casual riders to use bikes for their daily ride to the workplace, special discounts can be offered to them for using 		   
+   electric bikes so that they can reach their workplace quickly without having to face hassle of busy public transport as well as saving some time in the 	   
+   morning and in the evening to spare.
+
+3. Annual members can get discounts for riding average distance traveled by a casual member distance which can stir interest among the casual members to 	   
+   get annual subscription.
+
+
+
+
+ 
