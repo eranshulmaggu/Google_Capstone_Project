@@ -153,7 +153,7 @@ cat('Total rows after dropping blanks: ', nrow(df))
 # Writing data to file for future use.
 write.csv(df, 'cleaned_trip_data_working_copy.csv')
 ```
-# Step 4: Analysis
+## Step 4: Analysis
 ## Install Necessary Packages
 
 ```
