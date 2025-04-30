@@ -81,7 +81,6 @@ GROUP BY
 Above mentioned procedure has been executed for the end_station_name column as well.
 
 ```
-
 -- Calculating average GPS values for start_station_name
 
 SELECT
@@ -101,7 +100,8 @@ Result obtained from this query was saved as a csv file (avg_start_station_gps.c
 4. There has been some discrepancies regarding ride duration. Some of the ride durations came out negative (83 rows) and these were left out in the final cleaning query.
 <img src="Screenshots/Screenshot 2025-04-30 000137.png" width="600">
 <img src="Screenshots/Screenshot 2025-04-30 000150.png" width="400">
-   Moreover, since there are full-day passes for casual riders, there has been 4198 entries of rides more than 24 hour duration and these were kept in the final      processed data set.
+
+Moreover, since there are full-day passes for casual riders, there has been 4198 entries of rides more than 24 hour duration and these were kept in the final      processed data set.
    
 <img src="Screenshots/Screenshot 2025-04-30 000825.png" width="600">
 <img src="Screenshots/Screenshot 2025-04-30 000838.png" width="400">
@@ -155,6 +155,7 @@ write.csv(df, 'cleaned_trip_data_working_copy.csv')
 ```
 # Step 4: Analysis
 ## Install Necessary Packages
+
 ```
 install.packages("lubridate")
 install.packages("janitor")
@@ -406,11 +407,11 @@ Casual riders travel less distance compared to the annual members on average.
 ## Step 5: Summarizing Findings
 The key business question here was to identify the differences between usage pattern between the 2 types of rider (casual and annual members) of Cyclistic. There has been several differences observed from the above mentioned analysis of 12 month usage data. From the above mentioned analysis 3 major patterns have been identified. These are:
 
-	1. Casual riders spend more time than the annual members riding bikes. This can be indicative of annual members using bikes for specific and routinized purpose.
+1. Casual riders spend more time than the annual members riding bikes. This can be indicative of annual members using bikes for specific and routinized purpose.
 
-	2. Most of the casual riders use bike during afternoon whereas, annual members use bikes as work transport which can be clearly seen by the peak during office starting and ending hours.
+2. Most of the casual riders use bike during afternoon whereas, annual members use bikes as work transport which can be clearly seen by the peak during office starting and ending hours.
 
-	3. Usage of bikes in both user types is seasonal. Both casual riders and annual members ride less in during Winter. On the other hand, although ride counts by both types of riders are high during Summer, casual riders are more likely to use bikes.
+3. Usage of bikes in both user types is seasonal. Both casual riders and annual members ride less in during Winter. On the other hand, although ride counts by both types of riders are high during Summer, casual riders are more likely to use bikes.
 
 ## Conclusion
 In conclusion, there are several features / patterns can be observed from this data set. As per these observations following recommendations can be considered:
