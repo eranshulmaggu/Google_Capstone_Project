@@ -154,7 +154,7 @@ cat('Total rows after dropping blanks: ', nrow(df))
 write.csv(df, 'cleaned_trip_data_working_copy.csv')
 ```
 ## Step 4: Analysis
-## Install Necessary Packages
+### Install Necessary Packages
 
 ```
 install.packages("lubridate")
@@ -163,7 +163,7 @@ install.packages("skimr")
 install.packages("geosphere")
 ```
 
-## Importing Necessary Libraries
+### Importing Necessary Libraries
 
 ```
 library(lubridate)
@@ -171,7 +171,7 @@ library(janitor)
 library(skimr)
 library(geosphere)
 ```
-## Taking a Glimpse at the Data-frame
+### Taking a Glimpse at the Data-frame
 
 ```
 df <- df %>% 
@@ -179,7 +179,7 @@ df <- df %>%
 ```
 <img src="Screenshots/Screenshot 2025-04-30 093016.png" width="600">
 
-## Renaming Columns for Easier Understanding
+### Renaming Columns for Easier Understanding
 
 ```
 df <- rename(df, 
@@ -190,7 +190,7 @@ glimpse(df)
 ```
 <img src="Screenshots/Screenshot 2025-04-30 093321.png" width="600">
 
-## Basic Descriptive Analysis
+### Basic Descriptive Analysis
 
 ```
 df_min_max_time <- df %>% 
