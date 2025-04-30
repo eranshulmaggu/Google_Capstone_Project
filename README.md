@@ -1,5 +1,5 @@
-|                              Title                              |     Author   |    Date   |
-|:----------------------------------------------------------------| :------------| :---------|
+|	Title	|	Author	|	Date	|
+|:-------------:| :------------:| :------------:|
 |Case Study: How does a bike-share company navigate speedy success| Anshul Maggu | 2025-04-29|
 
 # Case Study: How does a bike-share company navigate speedy success
@@ -14,7 +14,7 @@ Moreno (Director of Marketing) has set a clear goal: Design marketing strategies
 
 ## Step 1: Getting Information of The Task
 ## Business Task
-To identify how do annual members and casual rider s use Cyclistic differently.
+To identify how do annual members and casual rider's use Cyclistic differently.
 
 ## Stakeholders
 Primary: Lily Monero, Director of Marketing
