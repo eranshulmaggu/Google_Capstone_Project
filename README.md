@@ -172,11 +172,13 @@ library(skimr)
 library(geosphere)
 ```
 ## Taking a Glimpse at the Data-frame
+
 ```
 df <- df %>% 
   glimpse()
 ```
 <img src="Screenshots/Screenshot 2025-04-30 093016.png" width="600">
+
 ## Renaming Columns for Easier Understanding
 
 ```
