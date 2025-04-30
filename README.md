@@ -39,7 +39,7 @@ Secondary: Cyclistic executive team (approves recommended marketing program)
 
 5. member_casual column contains 2 types of membership data: member or casual.
 
-# Step 3: Processing Data (Cleaning and Transformation)
+## Step 3: Processing Data (Cleaning and Transformation)
 ## Tools Used
 * SQL (sqlite, DB Browser): To process and clean data for further analysis
 
