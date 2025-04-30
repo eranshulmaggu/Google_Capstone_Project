@@ -49,7 +49,6 @@ Secondary: Cyclistic executive team (approves recommended marketing program)
 1. All of the last 12 month's ride data has been separated month-wise in the server. For proper management all of the data chunks are combined in a single table named "cyclistic_trip_data"
 
 2. COUNT() function was run to check the row count of the aggregated data-set. There are 5757551 rows in this data-set.
-
   
 ```
 SELECT
@@ -61,8 +60,8 @@ FROM
 <img src="Screenshots/Screenshot 2025-04-29 232443.png" width="300">
 
 3. Since GPS (latitude and longitude) data can have similar fractional data of same location, this has been verified and transformed into average values and exported into csv file (avg_start_station, avg_end_station) and imported as avg_start_station and avg_end_station tables in the database for easier management of location data.
-```
 
+```
 -- Checking for multiple GPS values of same location for start_station_name
 
 SELECT
