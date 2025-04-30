@@ -416,16 +416,11 @@ The key business question here was to identify the differences between usage pat
 ## Conclusion
 In conclusion, there are several features / patterns can be observed from this data set. As per these observations following recommendations can be considered:
 
-1. During summer the number of bike rides by casual riders are more than the annual members. Moreover, average bike riding time is greater in case of 		   
-   casual riders. This can be a good opportunity to offer discounts to become annual members with cheap rides. The longer the subscription the lower will 	   
-   be the down payment.
+1. During summer the number of bike rides by casual riders are more than the annual members. Moreover, average bike riding time is greater in case of 		   casual riders. This can be a good opportunity to offer discounts to become annual members with cheap rides. The longer the subscription the lower will 	   be the down payment.
 
-2. In order to attract working casual riders to use bikes for their daily ride to the workplace, special discounts can be offered to them for using 		   
-   electric bikes so that they can reach their workplace quickly without having to face hassle of busy public transport as well as saving some time in the 	   
-   morning and in the evening to spare.
+2. In order to attract working casual riders to use bikes for their daily ride to the workplace, special discounts can be offered to them for using 		   electric bikes so that they can reach their workplace quickly without having to face hassle of busy public transport as well as saving some time in the 	   morning and in the evening to spare.
 
-3. Annual members can get discounts for riding average distance traveled by a casual member distance which can stir interest among the casual members to 	   
-   get annual subscription.
+3. Annual members can get discounts for riding average distance traveled by a casual member distance which can stir interest among the casual members to 	   get annual subscription.
 
 
 
