@@ -67,27 +67,113 @@ Citation
 Digital Object Identifier (DOI) is 10.5281/zenodo.53894 which resolves to [this](https://zenodo.org/records/53894)
 
 ### Data-set Observations
-* The Fitbit data set contains 18 files containing different tracking data. These are:
-    - dailyActivity_merged.csv
-    - dailyCalories_merged.csv
-    - dailyIntensities_merged.csv
-    - dailySteps_merged.csv
-    - heartrate_seconds_merged.csv
-    - hourlyCalories_merged.csv
-    - hourlyIntensities_merged.csv
-    - hourlySteps_merged.csv
-    - minuteCaloriesNarrow_merged.csv
-    - minuteCaloriesWide_merged.csv
-    - minuteIntensitiesNarrow_merged.csv
-    - minuteIntensitiesWide_merged.csv
-    - minuteMETsNarrow_merged.csv
-    - minuteSleep_merged.csv
-    - minuteStepsNarrow_merged.csv
-    - minuteStepsWide_merged.csv
-    - sleepDay_merged.csv
-    - weightLogInfo_merged.csv
-* dailyActivity_merged.csv contains all the column data from dailyCalories.csv, dailyIntensities.csv, dailySteps.csv.
-* Some of the data are in both long and wide format. These are calorie, heart rate and steps data.
-* heartrate_seconds_merged.csv contains heart rate of an individual for 24 hrs at 15 seconds interval.
-* Summary of logged data:
+- The Fitbit data set contains 18 files containing different tracking data. These are:
+    1. dailyActivity_merged.csv
+    2. dailyCalories_merged.csv
+    3. dailyIntensities_merged.csv
+    4. dailySteps_merged.csv
+    5. heartrate_seconds_merged.csv
+    6. hourlyCalories_merged.csv
+    7. hourlyIntensities_merged.csv
+    8. hourlySteps_merged.csv
+    9. minuteCaloriesNarrow_merged.csv
+    10. minuteCaloriesWide_merged.csv
+    11. minuteIntensitiesNarrow_merged.csv
+    12. minuteIntensitiesWide_merged.csv
+    13. minuteMETsNarrow_merged.csv
+    14. minuteSleep_merged.csv
+    15. minuteStepsNarrow_merged.csv
+    16. minuteStepsWide_merged.csv
+    17. sleepDay_merged.csv
+    18. weightLogInfo_merged.csv
+- dailyActivity_merged.csv contains all the column data from dailyCalories.csv, dailyIntensities.csv, dailySteps.csv.
+- Some of the data are in both long and wide format. These are calorie, heart rate and steps data.
+- heartrate_seconds_merged.csv contains heart rate of an individual for 24 hrs at 15 seconds interval.
+- Summary of logged data:
+
+| Logged Data |    Second-wise     |    Minute-wise     |     Hour-wise      |      Day-wise      |
+| :---------: | :----------------: | :----------------: | :----------------: | :----------------: |
+|  Calories   |        :x:         | :heavy_check_mark: | :heavy_check_mark: | :heavy_check_mark: |
+|  Intensity  | :heavy_check_mark: | :heavy_check_mark: | :heavy_check_mark: | :heavy_check_mark: |
+| Heart rate  | :heavy_check_mark: | :heavy_check_mark: | :heavy_check_mark: | :heavy_check_mark: |
+|    Sleep    |        :x:         |        :x:         |        :x:         | :heavy_check_mark: |
+|   Weight    |        :x:         |        :x:         |        :x:         |     Inadequate     |
+
+### Cleaning and Processing Data
+The data set has been marked as pre-processed. There is less chance of blanks or dirty data. However, in order to clean obtained data following cleaning activities have been performed:
+- The date format of the daily and hourly data logs were modified with excel to 'YYYY-MM-DD HH:MM:SS' format for ease of future calculations.
+
+- Checking for blank values - none found
+
+  ```sql
+  -- This has been repeated for all of the field of the table
+  SELECT id
+  FROM dailyActivity_merged_date_mod
+  WHERE id is NULL
+  ```
+
+- Checking for negative values using following query - none found
+
+  ```sql 
+  SELECT
+  	min(TotalDistance), max(TotalDistance),
+  	min(TotalSteps), max(TotalSteps),
+  	min(LoggedActivitiesDistance), max(LoggedActivitiesDistance),
+  	min(SedentaryActiveDistance), max(SedentaryActiveDistance),
+  	min(SedentaryMinutes), max(SedentaryMinutes),
+  	min(Calories), max(Calories)
+  FROM
+  	dailyActivity_merged_date_mod
+  ```
+
+- Checking for full day sedentary activities in the dailyActivities_merged.csv as this can provide overview of each of the individuals daily activity patterns. 
+
+  ```sql
+  SELECT
+  	id,
+  	SedentaryMinutes, 
+  	count() AS 'Sedentary Days (=> 1440 mins)'
+  FROM
+  	dailyActivity_merged_date_mod
+  WHERE
+  	SedentaryMinutes >= 1440
+  GROUP BY
+  	id, SedentaryMinutes
+  ```
+  **Result:**
+
+  | ID         | Sedentary Days (=> 1440 mins) |
+  | :--------- | :---------------------------: |
+  | 1503960366 |               1               |
+  | 1844505072 |               9               |
+  | 1927972279 |              13               |
+  | 4020332650 |              14               |
+  | 4057192912 |               1               |
+  | 4319703577 |               1               |
+  | 4388161847 |               1               |
+  | 4702921684 |               1               |
+  | 5577150313 |               2               |
+  | 6117666160 |               5               |
+  | 6290855005 |               4               |
+  | 6775888955 |               9               |
+  | 7007744171 |               1               |
+  | 7086361926 |               1               |
+  | 8253242879 |               1               |
+  | 8583815059 |               6               |
+  | 8792009665 |               9               |
+
+  
+
+- Since this data spreads for both May and April months, there are participants with 31 days of data. There are inconsistencies in logged data as not all participants have full 30 days of data as well As a result, weekly cycle has been considered and 4 weeks (28 days) have been taken in consideration for time-frame of analysis since most of the participants' logged data can be taken into analysis.
+
+  ```sql
+  SELECT
+  	id, count() as days_logged
+  FROM
+  	dailyActivity_merged_date_mod
+  GROUP BY
+  	id
+  ORDER BY
+  	days_logged
+  ```
 
