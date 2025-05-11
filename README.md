@@ -8,7 +8,7 @@ First one, a bike sharing company, Cyclistic, is looking for usage pattern betwe
 
 ## Bellabeat: How can a wellness company play it smart?
 
-On the other hand, Bellabeat, a wellness company, is looking for patterns of usage of fitness tracker to improve on the features they provide and make positive impact on the users' fitness scenario. Details of this analysis report can be found [here](Google_DA_Capstone-Bellabeat_Case_Study/Case_study_Bellabeat-How_can_a_wellness_company_play_it_smart.md).
+On the other hand, Bellabeat, a wellness company, is looking for patterns of usage of fitness tracker to improve on the features they provide and make positive impact on the users' fitness scenario. Details of this analysis report can be found [here](https://github.com/eranshulmaggu/Google_Capstone_Project/blob/96c7d9e7975a97fbf75b8c43c321a4c223e522b1/Google_Capstone_Project_Bellabeat_Study/Case_study_Bellabeat-How_can_a_wellness_company_play_it_smart.md).
 
 ## Certificate of Completion
 <img src="Final_Certificate.png">
