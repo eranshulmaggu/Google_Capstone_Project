@@ -211,7 +211,6 @@ The data set has been marked as pre-processed. There is less chance of blanks or
   ```
 
   
-
   This query resulted in 760 rows of user activity data, which was analyzed in Tableau.
 
 - Along with the above-mentioned extracted table, sleepDay_merged.csv has been used for analysis.
@@ -223,3 +222,77 @@ As per available data, the following correlations have been analyzed and visuali
 ### Avg. Steps Taken Weekly
 
 In the first analysis, the average steps taken by the participants weekly were observed. The results showed that Sunday was the lowest, with 6991 steps. Tuesday and Saturday had higher numbers, above 8000, and the other days were roughly around 7500 steps.
+
+<img src='https://github.com/eranshulmaggu/Google_Capstone_Project/blob/add9834fa86ffea6297bc36d0e49fa1026ee6fa6/Google_Capstone_Project_Bellabeat_Study/Visualizations/Average%20Steps%20Taken%20Through%20Weekdays_2color.png' width=1024>
+
+Moreover, breakdown of each participants' average step counts throughout the weekdays have been plotted for better understanding of the movement pattern of the participants.
+
+<img src='https://github.com/eranshulmaggu/Google_Capstone_Project/blob/add9834fa86ffea6297bc36d0e49fa1026ee6fa6/Google_Capstone_Project_Bellabeat_Study/Visualizations/Avg%20Steps%20Taken%20by%20Participants%20on%20Weekdays.png' width=668>
+
+#### Speculation
+
+Participants are not consistent with maintaining their movement. On Sunday (holiday) participants tend to be more sedentary than the other days of the week. Moreover, it has been observed that most of the participants do not meet the 10,000 steps recommendation by CDC (Centers for Disease Control and Prevention) [1].
+
+### Participants' Pattern of Being Sedentary
+
+The below mentioned table portrays each participants'  sedentary days. This helps to observe which participant is more careful and serious about wearing the fitness tracker and measure sedentary and activity minutes.
+
+Moreover, average sedentary minutes by participants have been plotted in color mapped table in the following picture and it can be observed that almost half of the participants seem to have higher sedentary minutes.
+
+<img src='https://github.com/eranshulmaggu/Google_Capstone_Project/blob/add9834fa86ffea6297bc36d0e49fa1026ee6fa6/Google_Capstone_Project_Bellabeat_Study/Visualizations/Avg%20Sedentary%20Minutes%20of%20Participants.png' width= 920>
+
+#### Speculation
+
+1. Half of the participants spend most of the day without any significant movement or exercise which has been marked in Red colored shades.
+2. Some of the participants have a high number of sedentary days, indicating fitness tracker not being worn. Similar incident might have happened for the dark red shades of the color mapped table above, which might be the result of the tracker not being worn for some part of the day.
+
+### Time Spent in Different Activity Categories
+
+Time spent in different activity types has been visualized by weekdays. This shows that most of the time spent by the participants is in the lightly active category, averaging 192.7 minutes. Although the average very active time (21.8 minutes) is slightly higher than the fairly active time (13.6 minutes) spent throughout the weekdays, these values are far behind the lightly active minutes.
+
+<img src='https://github.com/eranshulmaggu/Google_Capstone_Project/blob/add9834fa86ffea6297bc36d0e49fa1026ee6fa6/Google_Capstone_Project_Bellabeat_Study/Visualizations/Active%20Time.png' width=986>
+
+#### Speculation
+
+Light activity includes regular daily activities such as walking slowly, sitting and using a computer, light standing work i.e. cooking, washing dishes etc., fishing sitting, playing instruments etc[2]. Above visualization means that most of the participants are not very active and conscious about being active and keeping healthy lifestyle.
+
+### Calories Burnt During Active Time
+
+Average calories burned during active time on weekdays have been measured and visualized. Here, the summation of lightly active, moderately active and very active time has been considered as "Total Active Minutes". The average of Total Active Minutes and Average of Calories Burnt throughout the weekdays have been plotted.
+
+<img src='https://github.com/eranshulmaggu/Google_Capstone_Project/blob/add9834fa86ffea6297bc36d0e49fa1026ee6fa6/Google_Capstone_Project_Bellabeat_Study/Visualizations/Avg%20Calories%20Burnt%20During%20Active%20Time.png' width=737>
+
+Moreover, the average calories burnt by the individual participants has been analyzed and it has been observed that half of the participants have calories burnt below 2000 mark.
+
+<img src='https://github.com/eranshulmaggu/Google_Capstone_Project/blob/add9834fa86ffea6297bc36d0e49fa1026ee6fa6/Google_Capstone_Project_Bellabeat_Study/Visualizations/Avg%20Calories%20Burnt%20by%20Participants.png' width=737>
+
+#### Speculation
+
+Calorie-burning requirement differs according to age, body weight, sex and calorie intake. These information are missing in this data set. Only weight information is available but for only 8 IDs and none of these weight logs represent any changes overtime. However, despite all of these missing information, as per general guideline women typically burn about 2000 calories per day and men burn about 2500 calories per day[3]. As per this guideline, the calories burnt throughout the weekdays are within this range.
+
+### Sleeping Durations of Participants
+
+The average sleep duration of the participants throughout the weekdays has been measured and visualized in order to get information about the average sleeping hours and sleeping patterns of participants.
+
+<img src='https://github.com/eranshulmaggu/Google_Capstone_Project/blob/add9834fa86ffea6297bc36d0e49fa1026ee6fa6/Google_Capstone_Project_Bellabeat_Study/Visualizations/Sleep%20Durations.png' width=484>
+
+#### Speculation
+
+Although there was no age information of the participants, it is recommended that an adult (18-60 years) gets 7 hours or more sleep every day [4]. In contrast to this information, most of the participant's sleep duration is less than 7 hours on weekdays, apart from Sunday, which is a  holiday.
+
+## Summary
+
+Although the data set lacked reliability and comprehensiveness due to a lack of proper data collection timeline; participants age, gender, sex and profession the data set yielded some usage patterns of the Fitbit fitness tracker users. Since healthy life-style gets down to participants' calorie usage and resting pattern, the activity time, steps taken, calories burnt, sedentary habits and sleep durations have been analyzed and visualized.  Firstly, in the case of activity, it has been observed that most of the participants do not meet the 10,000 steps requirement by CDC. Moreover, half of the participants spend most of the day without any significant movement. However, the calorie-burning requirement meets the desired value (men 2500 cal, women: 2000 cal) for half of the participants. This might be indicative of light exercise being done by the participants. On the other hand, considering sedentary condition, 1/3 of the participants have very high value of sedentary minutes. Some of the sedentary values might be indicative of the tracker not being worn all the time throughout the day. On account of sleep, average sleeping duration is below 8 hour mark even Sunday being the highest  with 7.1 hours.
+
+## Conclusion and Recommendation
+As per Bellabeat stakeholder recommendation, Fitbit user open data has been analyzed to identify patterns of fitness device usage. Although the data set lacked some information, as per analysis following recommendations can be provided:
+
+1. There has been high number of sedentary minutes observed in the data set. Potential cause of it might be not wearing the fitness tracker for long time in a day. The tracker needs to have feature to identify when it's on the users body or not. Otherwise this can produce wrong information about the user.
+2. Users need to be notified about the lacking activity periodically. Users can be emailed most appropriately show as notification on the cellphone screen. In addition, calorie intake tracking can be introduced and thus curated activity plan can be suggested by the application.
+
+## References
+
+1. Lifestyle Coach Facilitation Guide: Post-Core: https://www.cdc.gov/diabetes/prevention/pdf/postcurriculum_session8.pdf
+2. Examples of Moderate and Vigorous Physical Activity: https://www.hsph.harvard.edu/obesity-prevention-source/moderate-and-vigorous-physical-activity/
+3. How Many Calories Should You Burn Daily: https://www.nike.com/a/how-many-calories-should-you-burn-daily
+4. How Much Sleep Do I Need?: https://www.cdc.gov/sleep/about_sleep/how_much_sleep.html
