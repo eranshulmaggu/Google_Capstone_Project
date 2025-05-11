@@ -176,4 +176,4 @@ The data set has been marked as pre-processed. There is less chance of blanks or
   ORDER BY
   	days_logged
   ```
-
+<img src='Google_Capstone_Project_Bellabeat_Study/Screenshots/days_logged.jpg' width=668>
