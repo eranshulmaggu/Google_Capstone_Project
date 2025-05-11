@@ -176,4 +176,50 @@ The data set has been marked as pre-processed. There is less chance of blanks or
   ORDER BY
   	days_logged
   ```
-<img src='Google_Capstone_Project_Bellabeat_Study/Screenshots/days_logged.jpg' width=668>
+<img src="https://github.com/eranshulmaggu/Google_Capstone_Project/blob/d2dcccf2033ed569745972ebfe628851d684243d/Google_Capstone_Project_Bellabeat_Study/Screenshots/days_logged.jpg" width="300">
+
+
+```sql
+  -- Extracting 28 days of user activity data with no full day sedentary.
+  SELECT
+  	d_active.Id,
+  	d_active.ActivityDate,
+  	d_active.TotalSteps,
+  	d_active.TotalDistance,
+  	d_active.TrackerDistance,
+  	d_active.LoggedActivitiesDistance,
+  	d_active.VeryActiveDistance,
+  	d_active.ModeratelyActiveDistance,
+  	d_active.LightActiveDistance,
+  	d_active.SedentaryActiveDistance,
+  	d_active.VeryActiveMinutes,
+  	d_active.FairlyActiveMinutes,
+  	d_active.LightlyActiveMinutes,
+  	d_active.SedentaryMinutes,
+  	d_active.Calories
+  FROM
+  	dailyActivity_merged as d_active
+  INNER JOIN 
+  	(SELECT Id
+  	FROM dailyActivity_merged
+  	GROUP BY Id
+  	HAVING count(Id) >= 28) as d4w
+  ON 
+  	d_active.Id = d4w.Id
+  WHERE
+  	d_active.SedentaryMinutes < 1440
+  ```
+
+  
+
+  This query resulted in 760 rows of user activity data, which was analyzed in Tableau.
+
+- Along with the above-mentioned extracted table, sleepDay_merged.csv has been used for analysis.
+
+## Analyzing and Visualizing Data
+
+As per available data, the following correlations have been analyzed and visualized:
+
+### Avg. Steps Taken Weekly
+
+In the first analysis, the average steps taken by the participants weekly were observed. The results showed that Sunday was the lowest, with 6991 steps. Tuesday and Saturday had higher numbers, above 8000, and the other days were roughly around 7500 steps.
